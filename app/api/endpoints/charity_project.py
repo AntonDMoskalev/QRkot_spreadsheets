@@ -1,3 +1,5 @@
+from typing import List
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -14,12 +16,13 @@ from app.schemas.charity_project import (CharityProjectCreate,
                                          CharityProjectUpdate)
 from app.utils.invest import invested
 
+
 router = APIRouter()
 
 
 @router.get('/',
             response_model_exclude_none=True,
-            response_model=list[CharityProjectDB])
+            response_model=List[CharityProjectDB])
 async def get_all_charity_projects(session: AsyncSession = Depends(get_async_session)):
     """Gets a list of all projects."""
     all_projects = await charity_project_crud.get_multi(session)
