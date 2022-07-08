@@ -12,8 +12,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 router = APIRouter()
 
 
-@router.get('/', response_model=GoogleSpreadsheetsUrl,
-                 dependencies=[Depends(current_user)])
+@router.get('/',
+            response_model=GoogleSpreadsheetsUrl,
+            dependencies=[Depends(current_user)])
 async def get_all_closed_projects(wrapper_services: Aiogoogle = Depends(get_service),
                                   session: AsyncSession = Depends(get_async_session)):
     """
