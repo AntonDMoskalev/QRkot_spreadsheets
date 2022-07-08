@@ -1,13 +1,14 @@
 from fastapi import APIRouter, Depends
-from app.core.db import get_async_session
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.schemas.donation import DonationDB, DonationCreate, DonationSuperUserDB
+
+from app.core.db import get_async_session
+from app.core.user import current_superuser, current_user
 from app.crud.donation import donation_crud
-from app.core.user import current_user, current_superuser
 from app.models.charity_project import CharityProject
+from app.schemas.donation import (DonationCreate, DonationDB,
+                                  DonationSuperUserDB)
 from app.schemas.user import UserRead
 from app.utils.invest import invested
-
 
 router = APIRouter()
 

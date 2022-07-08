@@ -1,7 +1,8 @@
-from app.core.config import settings
-from sqlalchemy.orm import declarative_base, sessionmaker, declared_attr
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy import Column, Integer, func
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
+from sqlalchemy.orm import declarative_base, declared_attr, sessionmaker
+
+from app.core.config import settings
 
 
 class PreBase:
