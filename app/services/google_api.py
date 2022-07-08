@@ -17,7 +17,8 @@ async def spreadsheets_create(wrapper_services: Aiogoogle) -> str:
                                                    'title': 'Лист1',
                                                    'gridProperties': {'rowCount': 100,
                                                                       'columnCount': 11}}}]}
-    response = await wrapper_services.as_service_account(service.spreadsheets.create(json=spreadsheet_body))
+    response = await wrapper_services.as_service_account(
+        service.spreadsheets.create(json=spreadsheet_body))
     spreadsheetid = response['spreadsheetId']
     return spreadsheetid
 
@@ -42,12 +43,15 @@ async def spreadsheets_update_value(spreadsheetid: str,
                     ['Топ проектов по скорости закрытия'],
                     ['Название проекта', 'Время сбора', 'Описание']]
     for project in projects:
-        new_row = [str(project['name']), str(project['collection_time']), str(project['description'])]
+        new_row = [str(project['name']),
+                   str(project['collection_time']),
+                   str(project['description'])]
         table_values.append(new_row)
 
     update_body = {'majorDimension': 'ROWS',
                    'values': table_values}
-    await wrapper_services.as_service_account(service.spreadsheets.values.update(spreadsheetId=spreadsheetid,
-                                                                                 range='A1:E30',
-                                                                                 valueInputOption='USER_ENTERED',
-                                                                                 json=update_body))
+    await wrapper_services.as_service_account(
+        service.spreadsheets.values.update(spreadsheetId=spreadsheetid,
+                                           range='A1:E30',
+                                           valueInputOption='USER_ENTERED',
+                                           json=update_body))
